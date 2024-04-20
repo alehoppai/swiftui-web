@@ -1,52 +1,18 @@
-struct Modifiers {
-  var fontWeight: FontWeight?
-  var fontSize: FontSize?
-  var textDecoration: TextDecoration?
-  var fontStyle: FontStyle?
-  var lineHeight: LineHeight?
-  var color: Color?
-
-  mutating func update(with newModifiers: Modifiers) {
-      if let fontWeight = newModifiers.fontWeight {
-          self.fontWeight = fontWeight
-      }
-      if let fontSize = newModifiers.fontSize {
-          self.fontSize = fontSize
-      }
-      if let textDecoration = newModifiers.textDecoration {
-          self.textDecoration = textDecoration
-      }
-      if let fontStyle = newModifiers.fontStyle {
-          self.fontStyle = fontStyle
-      }
-      if let lineHeight = newModifiers.lineHeight {
-          self.lineHeight = lineHeight
-      }
-      if let color = newModifiers.color {
-          self.color = color
-      }
-  }
-}
-
-protocol HtmlView {
-  var tag: Tag { get }
-  var template: String { get }
-}
-
 struct Text: HtmlView {
   let value: String
   let inline: Bool
   let tag: Tag
 
-  var modifiers = Modifiers()
+  var modifier: TextModifier
 
-  init(_ value: String = "", inline: Bool = true, modifiers: Modifiers? = nil) {
+  init(_ value: String = "", inline: Bool = true, modifier: TextModifier? = nil) {
     self.value = value
     self.inline = inline
     self.tag = inline ? .span : .p
+    self.modifier = modifier ?? TextModifier()
 
-    if let modifiers = modifiers {
-      self.modifiers.update(with: modifiers)
+    if let modifier = modifier {
+      self.modifier.update(with: modifier)
     }
   }
 
@@ -55,23 +21,21 @@ struct Text: HtmlView {
   }
 
   func fontWeight(_ weight: FontWeight) -> Text {
-    Text(self.value, inline: self.inline, modifiers: Modifiers(fontWeight: weight))
+    Text(self.value, inline: self.inline, modifier: TextModifier(fontWeight: weight))
   }
   func fontSize(_ size: FontSize) -> Text {
-    Text(self.value, inline: self.inline, modifiers: Modifiers(fontSize: size))
+    Text(self.value, inline: self.inline, modifier: TextModifier(fontSize: size))
   }
   func textDecoration(_ decoration: TextDecoration) -> Text {
-    Text(self.value, inline: self.inline, modifiers: Modifiers(textDecoration: decoration))
+    Text(self.value, inline: self.inline, modifier: TextModifier(textDecoration: decoration))
   }
   func fontStyle(_ style: FontStyle) -> Text {
-    Text(self.value, inline: self.inline, modifiers: Modifiers(fontStyle: style))
+    Text(self.value, inline: self.inline, modifier: TextModifier(fontStyle: style))
   }
   func lineHeight(_ height: LineHeight) -> Text {
-    Text(self.value, inline: self.inline, modifiers: Modifiers(lineHeight: height))
+    Text(self.value, inline: self.inline, modifier: TextModifier(lineHeight: height))
   }
   func color(_ color: Color) -> Text {
-    Text(self.value, inline: self.inline, modifiers: Modifiers(color: color))
+    Text(self.value, inline: self.inline, modifier: TextModifier(color: color))
   }
 }
-
-var a = Text("abc", inline: true).fontWeight(.bold)
