@@ -1,6 +1,3 @@
-protocol Modifier {
-  mutating func update(with newModifier: TextModifier) -> Void
-}
 
 struct TextModifier {
   var fontWeight: FontWeight?
