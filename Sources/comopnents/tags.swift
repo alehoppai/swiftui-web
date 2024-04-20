@@ -1,4 +1,3 @@
 enum Tag: String {
-  case span
-  case p
+  case span, p, div
 }

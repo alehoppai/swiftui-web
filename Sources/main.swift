@@ -2,5 +2,9 @@
 // https://docs.swift.org/swift-book
 
 print("Hello, world!")
-var a = Text("abc", inline: true).fontWeight(.bold)
-print(a)
+
+var text = Text("abc", inline: true).fontWeight(.bold)
+print(text)
+
+var box = Box().padding(.top(10), .px)
+print(box)
