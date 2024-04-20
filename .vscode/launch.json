@@ -1,0 +1,28 @@
+{
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "sourceLanguages": [
+        "swift"
+      ],
+      "args": [],
+      "cwd": "${workspaceFolder:swiftui-web}",
+      "name": "Debug swiftui-web",
+      "program": "${workspaceFolder:swiftui-web}/.build/debug/swiftui-web",
+      "preLaunchTask": "swift: Build Debug swiftui-web"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "sourceLanguages": [
+        "swift"
+      ],
+      "args": [],
+      "cwd": "${workspaceFolder:swiftui-web}",
+      "name": "Release swiftui-web",
+      "program": "${workspaceFolder:swiftui-web}/.build/release/swiftui-web",
+      "preLaunchTask": "swift: Build Release swiftui-web"
+    }
+  ]
+}
