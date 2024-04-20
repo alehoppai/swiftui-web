@@ -1,9 +1,15 @@
 struct Box: HtmlView {
     let tag: Tag = .div
+    let children: [any HtmlView]
     var modifier: BoxModifier
 
-    init(modifier: BoxModifier? = nil) {
+    // children: ((inout [any HtmlView]) -> Void)? = nil
+    init(modifier: BoxModifier? = nil, _ children: (_ views: any HtmlView...) -> [any HtmlView] = { views in views }) {
         self.modifier = modifier ?? BoxModifier()
+        print("CHILDREN====\n")
+        print(children())
+        
+        self.children = []
 
         if let modifier = modifier {
             self.modifier.update(with: modifier)

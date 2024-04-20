@@ -3,8 +3,10 @@
 
 print("Hello, world!")
 
-var text = Text("abc", inline: true).fontWeight(.bold)
-print(text)
+var box = Box { _ in
+  Text("First text", inline: true).fontWeight(.bold)
+  Text("SecondText", inline: true).fontWeight(.bold)
 
-var box = Box().padding(.top(10), .px)
+  return []
+}.padding(.top(10), .px)
 print(box)
